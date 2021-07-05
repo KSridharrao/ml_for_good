@@ -23,13 +23,11 @@ def upload_file():
             mongodb_client = PyMongo(app)
             db = mongodb_client.db
             db.mlops1.insert({"name":"test","image":UPLOAD_FOLDER})
-            return  redirect("/")
+            return  redirect("/final")
             
         else:
-            return "Upload only images"
+            return redirect("/wrong")
         
-
-
 ALLOWED_EXTENSIONS = { 'png', 'jpg', 'jpeg'}
 
 def allowed_file(filename):
@@ -39,11 +37,9 @@ def allowed_file(filename):
 def wrong():
     return render_template('wrong.html')
 
-
-
-
-
-
+@app.route('/final')
+def final():
+    return render_template('final.html')
 
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER 
